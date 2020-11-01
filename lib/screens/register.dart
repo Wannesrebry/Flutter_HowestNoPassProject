@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nopassauthenticationclient/components/drawer/drawer.dart';
 import 'package:nopassauthenticationclient/controller/registercontroller.dart';
 import 'package:nopassauthenticationclient/screens/recover.dart';
@@ -15,6 +16,8 @@ class RegisterScreen extends StatefulWidget{
 class _RegisterScreen extends State<RegisterScreen>{
   final textController = TextEditingController();
   final registerController = RegisterController();
+
+  String userRCode;
 
   String rCodeValidationHolder = "";
   var rCodeValidationHolderColor = Colors.red;
@@ -46,6 +49,8 @@ class _RegisterScreen extends State<RegisterScreen>{
             Container(
               padding: EdgeInsets.all(10),
               child: TextField(
+                maxLength: 10,
+                maxLengthEnforced: true,
                 controller: textController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -53,6 +58,7 @@ class _RegisterScreen extends State<RegisterScreen>{
                 ),
                 onChanged: (String value) async{
                   setState(() {
+                    userRCode = value;
                     rCodeValidationHolder = registerController.formatValidation(value);
                     rCodeValidationHolderColor = registerController.validationColor(value);
                   });
@@ -77,7 +83,7 @@ class _RegisterScreen extends State<RegisterScreen>{
                       //rCodeValidationHolder = rCodeController.onClick(textController.text);
                     });
                     // popup:
-                    _showVerifyDialog(context);
+                    showWaitingDialog(context);
 
 
 
@@ -114,10 +120,10 @@ class _RegisterScreen extends State<RegisterScreen>{
 
   //https://flutterawesome.com/a-collection-of-loading-indicators-animated-with-flutter/
 
-   _showVerifyDialog(var mainContext) async {
+   showWaitingDialog(var mainContext) async {
     showDialog(
         context: context,
-        barrierDismissible: false, // set false for not closing on outside border.
+        barrierDismissible: true, // set false for not closing on outside border.
         builder: (_) => new AlertDialog(
           content: Container(
             width: MediaQuery.of(context).size.width /4,
@@ -136,7 +142,7 @@ class _RegisterScreen extends State<RegisterScreen>{
             )
           ),
       ));
-    await registerController.showToValidateData(context, mainContext);
+    await registerController.showToValidateData(userRCode, context, mainContext);
   }
 }
 

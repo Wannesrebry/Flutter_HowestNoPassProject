@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:nopassauthenticationclient/controller/internet_controller.dart';
 import 'package:nopassauthenticationclient/main.dart';
+import 'package:nopassauthenticationclient/models/dto/requests/register_data_verify_req_dto.dart';
 
+final InternetController api = InternetController();
 
 class RegisterController extends StatefulWidget{
   String blurredFirstName = "W****s";
@@ -10,7 +15,7 @@ class RegisterController extends StatefulWidget{
 
   String text;
 
-  RegisterController(){}
+  RegisterController();
 
   onClick(String rCode){
 
@@ -38,15 +43,17 @@ class RegisterController extends StatefulWidget{
     }
   }
 
-  showToValidateData(BuildContext context, BuildContext mainContext) async{
-    Future.delayed(const Duration(seconds: 1), (){
-      Navigator.of(context).pop();
-      _showDataVerificationDialog(mainContext);
+  showToValidateData(String rCode, BuildContext context, BuildContext mainContext) async{
 
+    api.startRegistration(rCode).then(
+      (response){
+        DataVerifyReqDto reqDto = DataVerifyReqDto.fromJson(jsonDecode(response.body)["res"]);
+        Navigator.of(context).pop();
+        _showDataVerificationDialog(mainContext, reqDto);
     });
   }
 
-  _showDataVerificationDialog(var mainContext) async {
+  _showDataVerificationDialog(var mainContext, DataVerifyReqDto reqDto) async {
     showDialog(
         context: mainContext,
         barrierDismissible: false, // set false for not closing on outside border.
@@ -64,10 +71,10 @@ class RegisterController extends StatefulWidget{
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text("Complet the data in order to succeed registration.",
+                    Text("Complete the data in order to succeed registration.",
                       textAlign: TextAlign.center,
                     ),
-                    Text("First name: $blurredFirstName",
+                    Text("First name: ${reqDto.firstName}",
                       textAlign: TextAlign.left,
                     ),
                     Container(
@@ -79,7 +86,7 @@ class RegisterController extends StatefulWidget{
                         ),
                       ),
                     ),
-                    Text("First name: $blurredLastName",
+                    Text("Last name: ${reqDto.lastName}",
                       textAlign: TextAlign.left,
                     ),
                     Container(
