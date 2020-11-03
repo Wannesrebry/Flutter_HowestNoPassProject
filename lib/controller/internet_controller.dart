@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:nopassauthenticationclient/models/encrypter.dart';
 
 class InternetController{
   final String baseUrl = "http://192.168.6.128:8888";
 
   Future<http.Response> startRegistration(String rCode) {
+
+
     return http.post(
       baseUrl + "/preregistration",
       headers: <String, String>{

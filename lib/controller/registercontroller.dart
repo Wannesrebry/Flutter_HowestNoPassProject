@@ -9,8 +9,8 @@ import 'package:nopassauthenticationclient/models/dto/requests/register_data_ver
 final InternetController api = InternetController();
 
 class RegisterController extends StatefulWidget{
-  String blurredFirstName = "W****s";
-  String blurredLastName = "R****y";
+  String blurredFirstName = "";
+  String blurredLastName = "";
 
 
   String text;
@@ -44,7 +44,6 @@ class RegisterController extends StatefulWidget{
   }
 
   showToValidateData(String rCode, BuildContext context, BuildContext mainContext) async{
-
     api.startRegistration(rCode).then(
       (response){
         DataVerifyReqDto reqDto = DataVerifyReqDto.fromJson(jsonDecode(response.body)["res"]);

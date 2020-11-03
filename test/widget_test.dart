@@ -5,26 +5,40 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:nopassauthenticationclient/main.dart';
+import 'package:nopassauthenticationclient/models/encrypter.dart';
+import 'package:pointycastle/asymmetric/api.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(Run());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test("test", () async{
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final Encrypter enc = Encrypter();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    final seed = ["test", "test", "test", "test", "test", "test", "test", "test"];
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await enc.createAndStoreKeyPairFrom(seed);
+
+
+    var msg = enc.toSignMsgToUint8("VERIFY THIS");
+    var signature = await enc.sign(msg);
+    enc.verify(msg, signature);
+
+/*
+    RSAPrivateKey foo = RSAPrivateKey(
+      privateKey.n,
+      privateKey.d,
+      privateKey.p,
+      privateKey.q,
+    );
+    RSAPublicKey bar = RSAPublicKey(publicKey.n, publicKey.e);
+*/
+
   });
 }
+

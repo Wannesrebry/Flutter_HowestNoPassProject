@@ -25,6 +25,9 @@ dependencies:
   sqflite: ^1.0.0
   path_provider: ^0.4.1
   flutter_spinkit: "^2.1.0"
+  pointycastle: ^1.0.0-rc4
+  shared_preferences: ^0.5.12
+  flutter_secure_storage: ^3.3.5
 
   flutter:
     sdk: flutter
