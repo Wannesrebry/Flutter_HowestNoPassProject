@@ -28,6 +28,8 @@ dependencies:
   pointycastle: ^1.0.0-rc4
   shared_preferences: ^0.5.12
   flutter_secure_storage: ^3.3.5
+  asn1lib: ^0.8.1
+
 
   flutter:
     sdk: flutter

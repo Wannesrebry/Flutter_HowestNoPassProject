@@ -83,11 +83,7 @@ class _RegisterScreen extends State<RegisterScreen>{
                       //rCodeValidationHolder = rCodeController.onClick(textController.text);
                     });
                     // popup:
-                    showWaitingDialog(context);
-
-
-
-
+                    _startRegistrationProcess();
                   },
                 )
             ),
@@ -120,8 +116,9 @@ class _RegisterScreen extends State<RegisterScreen>{
 
   //https://flutterawesome.com/a-collection-of-loading-indicators-animated-with-flutter/
 
-   showWaitingDialog(var mainContext) async {
-    showDialog(
+
+   BuildContext showWaitingDialog(){
+     showDialog(
         context: context,
         barrierDismissible: true, // set false for not closing on outside border.
         builder: (_) => new AlertDialog(
@@ -142,7 +139,15 @@ class _RegisterScreen extends State<RegisterScreen>{
             )
           ),
       ));
-    await registerController.showToValidateData(userRCode, context, mainContext);
+    return context;
+  }
+
+  void _startRegistrationProcess() async{
+    var ctxPopup = showWaitingDialog();
+    registerController.showToValidateData(userRCode, ctxPopup, context);
+
   }
 }
+
+
 
