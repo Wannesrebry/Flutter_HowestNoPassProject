@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nopassauthenticationclient/components/drawer/drawer.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/components/drawer.dart';
 
 class HomeScreen extends StatefulWidget{
   @override

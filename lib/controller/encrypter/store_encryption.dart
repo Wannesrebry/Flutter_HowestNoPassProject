@@ -16,13 +16,29 @@ class LocalStoreKeyPair{
     return encHelper.parsePublicKeyFromPem(publicKeyPEM);
   }
 
-  Future<void> addKeyPair(AsymmetricKeyPair<PublicKey, PrivateKey> pair)async {
+  Future<void> addKeyPair(AsymmetricKeyPair<PublicKey, PrivateKey> pair, List<String> seeds)async {
     await _storage.write(key: "privateKeyPEM", value: encHelper.encodePrivateKeyToPem(pair.privateKey));
     await _storage.write(key: "publicKeyPEM", value: encHelper.encodePublicKeyToPem(pair.publicKey));
+  }
+
+  Future<void> addSeeds(List<String> seeds)async{
+    await _storage.write(key: "seeds", value: seeds.toString());
+  }
+
+  Future<List<String>> getSeeds()async{
+    String seedString = await _storage.read(key: "seeds");
+    return stringToList(seedString);
   }
 
   Future<void> clearLocalKeyPair() async{
     await _storage.deleteAll();
   }
 
+}
+
+List<String> stringToList(String s){
+  List<String> res = s.split(",");
+  res[0] = res[0].replaceAll("[", "");
+  res[res.length-1] = res[res.length-1].replaceAll("]", "");
+  return res;
 }

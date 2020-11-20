@@ -13,4 +13,10 @@ class LocalStorageController {
     return await storage.readAll();
   }
 
+  Future<void> add(String key, String value, {force: false})async{
+    if(force || !await storage.containsKey(key: key)){
+      await storage.write(key: key, value: value);
+    }
+  }
+
 }

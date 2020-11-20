@@ -1,12 +1,15 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:asn1lib/asn1lib.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:nopassauthenticationclient/controller/encrypter/prepare_encryption.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/data/encrypt_data.dart';
 import 'package:pointycastle/export.dart';
 
-final Map<String, String> _DIGEST_IDENTIFIER_HEXES = {
+final Map<String, String> _digestIntifierHexes = {
   "MD2": "06082a864886f70d0202",
   "MD4": "06082a864886f70d0204",
   "MD5": "06082a864886f70d0205",
@@ -35,13 +38,13 @@ Future<AsymmetricKeyPair<PublicKey, PrivateKey>> _generateRSAkeyPair(
 }
 
 String rsaSign(Uint8List uint8Message, RSAPrivateKey privateKey) {
-  var signer = RSASigner(SHA256Digest(), "0609608648016503040201");
+  var signer = RSASigner(SHA256Digest(), _digestIntifierHexes["SHA-256"]);
   signer.init(true, PrivateKeyParameter<RSAPrivateKey>(privateKey));
   return  base64Encode(signer.generateSignature(uint8Message).bytes);
 }
 
 bool rsaVerify(String signedMessage, Uint8List message, RSAPublicKey publicKey) {
-  var signer = RSASigner(SHA256Digest(), "0609608648016503040201");
+  var signer = RSASigner(SHA256Digest(), _digestIntifierHexes["SHA-256"]);
   signer.init(false, PublicKeyParameter<RSAPublicKey>(publicKey));
   return signer.verifySignature(message, RSASignature(base64Decode(signedMessage)));
 }
@@ -199,4 +202,18 @@ class RetrieveEncryptionData{
 
     return base64.decode(pem);
   }
+
+  EncryptData generateVerifiableData(RSAPrivateKey pkey){
+    final pEnc = PrepareForEncryption();
+    String toSignData = _getRandomString(32);
+    Uint8List uint8ToSignData = pEnc.stringToUint8([toSignData]);
+    final signature = rsaSign(uint8ToSignData, pkey);
+    EncryptData res = EncryptData(toSignData, signature);
+    return res;
+  }
 }
+
+const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+Random _rnd = Random();
+String _getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));

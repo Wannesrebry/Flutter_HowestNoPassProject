@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:nopassauthenticationclient/screens/account.dart';
-import 'package:nopassauthenticationclient/screens/recover.dart';
-import 'package:nopassauthenticationclient/screens/register.dart';
-import 'package:nopassauthenticationclient/user/user.dart';
-
+import 'package:nopassauthenticationclient/data/user.dart';
+import 'package:nopassauthenticationclient/view/screens/account.dart';
+import 'package:nopassauthenticationclient/view/screens/recover.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/screens/register/register.dart';
 
 class LoadDrawer extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // load user at start of app-boot
-    User u = new User();
-    //
-    if(u.hasValidCredentials()){
-      return AuthDrawer();
-    }else{return BasicDrawer();}
+    // chango to check local data:
+    //todo:
+    return BasicDrawer();
   }
 
 }
@@ -24,7 +21,7 @@ class AuthDrawer extends StatelessWidget{
   Widget build(BuildContext context) {
     NavItemFactory navItemFactory = new NavItemFactory(context);
    return DrawerTemplate().create([
-     navItemFactory.create(Icons.home, "Home", "/"),
+     navItemFactory.create(Icons.home, "Home123", "/"),
      navItemFactory.create(Icons.account_box_rounded, "Account", AccountScreen.routeName),
      navItemFactory.create(Icons.settings, "Settings", AccountScreen.routeName),
      navItemFactory.create(Icons.article_outlined, "Logs", AccountScreen.routeName)
@@ -37,7 +34,7 @@ class BasicDrawer extends StatelessWidget{
   Widget build(BuildContext context) {
     NavItemFactory navItemFactory = new NavItemFactory(context);
     return DrawerTemplate().create([
-      navItemFactory.create(Icons.home, "Home", "/"),
+      navItemFactory.create(Icons.home, "Home123", "/"),
       navItemFactory.create(Icons.account_box_rounded, "Register", RegisterScreen.routeName),
       navItemFactory.create(Icons.settings, "Recover", RecoverScreen.routeName),
     ]);
@@ -90,7 +87,6 @@ class NavItemFactory{
         //navigate to route
         Navigator.of(__context).pushNamed(routeName);
       },
-
     );
   }
 }

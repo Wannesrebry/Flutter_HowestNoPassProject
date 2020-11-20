@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nopassauthenticationclient/components/drawer/drawer.dart';
+import 'package:nopassauthenticationclient/controller/new/register_controller.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/components/drawer.dart';
 import 'package:nopassauthenticationclient/controller/registercontroller.dart';
-import 'package:nopassauthenticationclient/screens/recover.dart';
+import 'package:nopassauthenticationclient/view/components/dialogs/wait.dart';
+import 'package:nopassauthenticationclient/view/screens/recover.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 
 class RegisterScreen extends StatefulWidget{
@@ -16,11 +19,13 @@ class RegisterScreen extends StatefulWidget{
 class _RegisterScreen extends State<RegisterScreen>{
   final textController = TextEditingController();
   final registerController = RegisterController();
+  final registerControllerNew = RegisterControllerNew();
 
   String userRCode;
 
   String rCodeValidationHolder = "";
   var rCodeValidationHolderColor = Colors.red;
+  BuildContext _popupCtx;
 
   @override
   void dispose(){
@@ -83,7 +88,10 @@ class _RegisterScreen extends State<RegisterScreen>{
                       //rCodeValidationHolder = rCodeController.onClick(textController.text);
                     });
                     // popup:
-                    _startRegistrationProcess();
+                    //showLoadingScreen(context);
+                    registerControllerNew.onClickRegistrationButton(userRCode, context);
+                    //_renderWaitDialog("Test message");
+                    //_startRegistrationProcess();
                   },
                 )
             ),
@@ -114,39 +122,31 @@ class _RegisterScreen extends State<RegisterScreen>{
 
   }
 
+
+  _renderWaitDialog(String msg)async{
+    final Wait popup = new Wait("test");
+    showDialog(
+      context: context,
+      barrierDismissible: true, // set false for not closing on outside border.
+      builder: (_) => popup.build(context)
+    );
+  }
+
   //https://flutterawesome.com/a-collection-of-loading-indicators-animated-with-flutter/
 
-
-   BuildContext showWaitingDialog(){
-     showDialog(
-        context: context,
-        barrierDismissible: true, // set false for not closing on outside border.
-        builder: (_) => new AlertDialog(
-          content: Container(
-            width: MediaQuery.of(context).size.width /4,
-            height: MediaQuery.of(context).size.width /4,
-            child: ListView(
-              padding: const EdgeInsets.all(4),
-              children: [
-                SpinKitRotatingCircle(
-                  color: Colors.blue,
-                  size: 75,
-              ),
-                Text("Awaiting server response ...",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15)),
-              ],
-            )
-          ),
-      ));
-    return context;
-  }
-
   void _startRegistrationProcess() async{
-    var ctxPopup = showWaitingDialog();
-    registerController.showToValidateData(userRCode, ctxPopup, context);
+    //var ctxPopup = showWaitingDialog();
+    //await lSC.add("registrationCode", userRCode, force: true);
+    //registerController.showToValidateData(userRCode, ctxPopup, context);
 
   }
+
+  showLoadingScreen(BuildContext context)async{
+    await new Wait("loading").init(context);
+  }
+
+
+
 }
 
 
