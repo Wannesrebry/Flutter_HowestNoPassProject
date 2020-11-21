@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:nopassauthenticationclient/controller/new/register_controller.dart';
 import 'package:nopassauthenticationclient/data/user.dart';
-import 'package:nopassauthenticationclient/view/screens/account.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/screens/auth/account.dart';
 import 'package:nopassauthenticationclient/view/screens/recover.dart';
 import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/screens/register/register.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/screens/auth/seeds.dart';
 
 class LoadDrawer extends StatelessWidget{
+  final userRepo = LocalUserRepo();
+
   @override
   Widget build(BuildContext context) {
     // load user at start of app-boot
@@ -21,8 +25,9 @@ class AuthDrawer extends StatelessWidget{
   Widget build(BuildContext context) {
     NavItemFactory navItemFactory = new NavItemFactory(context);
    return DrawerTemplate().create([
-     navItemFactory.create(Icons.home, "Home123", "/"),
+     navItemFactory.create(Icons.home, "Home", "/"),
      navItemFactory.create(Icons.account_box_rounded, "Account", AccountScreen.routeName),
+     navItemFactory.create(Icons.settings, "Seeds", SeedsScreen.routeName),
      navItemFactory.create(Icons.settings, "Settings", AccountScreen.routeName),
      navItemFactory.create(Icons.article_outlined, "Logs", AccountScreen.routeName)
    ]);
@@ -34,7 +39,7 @@ class BasicDrawer extends StatelessWidget{
   Widget build(BuildContext context) {
     NavItemFactory navItemFactory = new NavItemFactory(context);
     return DrawerTemplate().create([
-      navItemFactory.create(Icons.home, "Home123", "/"),
+      navItemFactory.create(Icons.home, "Home", "/"),
       navItemFactory.create(Icons.account_box_rounded, "Register", RegisterScreen.routeName),
       navItemFactory.create(Icons.settings, "Recover", RecoverScreen.routeName),
     ]);

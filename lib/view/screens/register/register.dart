@@ -40,7 +40,7 @@ class _RegisterScreen extends State<RegisterScreen>{
         title: const Text("Register"),
         backgroundColor: Colors.blue,
       ),
-      drawer: LoadDrawer(),
+      drawer: BasicDrawer(),
       body: Padding(
         padding: EdgeInsets.all(10),
         child: ListView(

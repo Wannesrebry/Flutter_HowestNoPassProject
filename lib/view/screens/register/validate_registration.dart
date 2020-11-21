@@ -43,7 +43,7 @@ class _ValidateRegistrationState extends State<ValidateRegistration> {
           title: const Text("Validate registration"),
           backgroundColor: Colors.blue,
         ),
-        drawer: LoadDrawer(),
+        drawer: BasicDrawer(),
         body: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -104,7 +104,7 @@ class _ValidateRegistrationState extends State<ValidateRegistration> {
                           style: TextStyle(color: Colors.white)),
                       onPressed: ()async {
                         // send to server.
-                        registerControllerNew.verifyData(input);
+                        registerControllerNew.verifyData(input, context);
                           print(input);
                       })
                 ])

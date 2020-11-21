@@ -10,9 +10,12 @@ import 'package:nopassauthenticationclient/controller/encrypter/store_encryption
 import 'package:nopassauthenticationclient/controller/internet_controller.dart';
 import 'package:nopassauthenticationclient/controller/local_storage.dart';
 import 'package:nopassauthenticationclient/data/dto/response/register_data_verify_req_dto.dart';
+import 'package:nopassauthenticationclient/data/dto/response/register_success_res_dto.dart';
+import 'package:nopassauthenticationclient/data/user.dart';
 import 'package:nopassauthenticationclient/data/user_registration_input.dart';
 import 'package:nopassauthenticationclient/view/components/dialogs/wait.dart';
 import 'package:nopassauthenticationclient/view/screens/register/validate_registration.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/screens/auth/seeds.dart';
 import 'package:pointycastle/export.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
@@ -76,13 +79,18 @@ class RegisterControllerNew extends StatefulWidget{
     return ToVerifyDataResDto(bFirstName, bLastName, sessionId);
   }
 
-  Future<void> verifyData(UserRegistrationInput input) async{
+  Future<void> verifyData(UserRegistrationInput input, BuildContext context) async{
     PrivateKey privateKey= await _keyStore.getPrivateKey();
-    _internetController.validateRegistration(input, privateKey).then((response){
+    _internetController.validateRegistration(input, privateKey).then((response)async{
       print(response.body);
       if(response.statusCode == 200){
+        // Save user locally:
+        Map jsonBody = json.decode(response.body);
+        RegisterSuccessDto dto = RegisterSuccessDto.fromRequestBody(jsonBody);
+        User user = User.fromRegisterSuccessDto(dto);
+        await LocalUserRepo().addUser(user);
         // redirect to show seed page:
-
+        Navigator.of(context).pushNamed(SeedsScreen.routeName);
       }else{
         // Bad request route:
 
@@ -110,12 +118,44 @@ class PopupController{
     return active.hide();
   }
 
-  Future<void> update(String msg){
+  Future<void> update(String msg) {
     active.update(
-      message: msg
+        message: msg
     );
   }
+}
 
+class LocalUserRepo{
+  final repo = LocalStorageController();
 
+  Future<void> addUser(User user)async{
+    await repo.add("firstName", user.firstName);
+    await repo.add("lastName", user.lastName);
+    await repo.add("identifier", user.identifier);
+    await repo.add("birthDate", user.birthDate.toString());
+  }
+
+  Future<User> getUser()async{
+    Map locals = await repo.getAll();
+    User user = new User(
+      locals["firstName"],
+      locals["lastName"],
+      locals["identifier"],
+      DateTime.parse(locals["birthDate"])
+    );
+    return user;
+  }
+
+  Future<bool> isUserAuth()async{
+    try{
+      User user = await getUser();
+      if(user != null){
+        return true;
+      }else
+        return false;
+    }catch(ignore){
+      return false;
+    }
+  }
 
 }

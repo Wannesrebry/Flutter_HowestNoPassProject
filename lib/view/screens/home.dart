@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/components/drawer.dart';
+import 'package:nopassauthenticationclient/controller/new/register_controller.dart';
+import 'package:nopassauthenticationclient/view/components/drawer.dart';
+import 'package:nopassauthenticationclient/view/screens/auth/home.dart';
 
 class HomeScreen extends StatefulWidget{
   @override
@@ -11,12 +13,14 @@ class HomeScreenState extends State<HomeScreen>{
 
   @override
   Widget build(BuildContext context) {
+    checkIfLogged(context);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("MarsNoPass Auth"),
           backgroundColor: Colors.blue,
         ),
-        drawer: LoadDrawer(),
+        drawer: BasicDrawer(),
         body: Column(
           children: [
             Image.asset('assets/images/banner.jpg',
@@ -31,4 +35,13 @@ class HomeScreenState extends State<HomeScreen>{
         ),
       );
   }
+
+  void checkIfLogged(BuildContext context) async{
+    final userRepo = LocalUserRepo();
+    bool isAuth = await userRepo.isUserAuth();
+    if(isAuth){
+      Navigator.of(context).pushNamed(AuthHome.routeName);
+    }
+  }
+
 }

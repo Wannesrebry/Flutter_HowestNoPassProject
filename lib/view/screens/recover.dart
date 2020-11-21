@@ -15,7 +15,7 @@ class RecoverScreen extends StatelessWidget{
         title: const Text("Recover"),
         backgroundColor: Colors.blue,
       ),
-      drawer: LoadDrawer(),
+      drawer: BasicDrawer(),
       body: Column(
             children: [
 

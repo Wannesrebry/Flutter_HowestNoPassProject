@@ -2,11 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 import 'package:flutter/material.dart';
-import 'package:nopassauthenticationclient/view/screens/account.dart';
+import 'package:nopassauthenticationclient/view/screens/auth/home.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/screens/auth/account.dart';
 import 'package:nopassauthenticationclient/view/screens/home.dart';
 import 'package:nopassauthenticationclient/view/screens/recover.dart';
 import 'package:nopassauthenticationclient/view/screens/register/register.dart';
 import 'package:nopassauthenticationclient/view/screens/register/validate_registration.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/screens/auth/seeds.dart';
 
 void main() => runApp(Run());
 
@@ -20,7 +22,9 @@ class Run extends StatelessWidget{
         AccountScreen.routeName: (BuildContext context) => new AccountScreen(),
         RegisterScreen.routeName: (BuildContext context) => new RegisterScreen(),
         ValidateRegistration.routeName: (BuildContext context) => new ValidateRegistration(),
-        RecoverScreen.routeName: (BuildContext context) => new RecoverScreen()
+        RecoverScreen.routeName: (BuildContext context) => new RecoverScreen(),
+        SeedsScreen.routeName: (BuildContext context) => new SeedsScreen(),
+        AuthHome.routeName: (BuildContext context) => new AuthHome(),
       }
     );
   }
