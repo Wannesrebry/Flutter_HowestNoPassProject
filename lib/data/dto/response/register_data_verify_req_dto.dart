@@ -8,7 +8,7 @@ class ToVerifyDataResDto{
 
   final String firstName;
   final String lastName;
-  final String sessionId;
+  final   String sessionId;
 
   Map toJson() => {
     "firstName": "$firstName",

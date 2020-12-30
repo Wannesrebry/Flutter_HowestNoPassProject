@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nopassauthenticationclient/controller/logincontroller.dart';
 import 'package:nopassauthenticationclient/view/components/drawer.dart';
 
 class AuthHome extends StatefulWidget{
@@ -10,6 +11,8 @@ class AuthHome extends StatefulWidget{
 }
 
 class AuthHomeState extends State<AuthHome>{
+  final loginController = LoginController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +24,14 @@ class AuthHomeState extends State<AuthHome>{
       drawer: AuthDrawer(),
       body: Column(
         children: [
-          Text("Mars NoPass Auth",
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          RaisedButton(
+            child: Text("Check for login requests"),
+            color: Colors.blue,
+            onPressed: (){
+              //navigate to route
+              loginController.onClickLoginRequestsBtn(context);
+            },
+          )
         ],
       ),
     );

@@ -1,9 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:nopassauthenticationclient/controller/encrypter/compute_encryption.dart';
 import 'package:nopassauthenticationclient/controller/encrypter/prepare_encryption.dart';
 import 'package:nopassauthenticationclient/controller/encrypter/store_encryption.dart';
@@ -13,15 +10,13 @@ import 'package:nopassauthenticationclient/data/dto/response/register_data_verif
 import 'package:nopassauthenticationclient/data/dto/response/register_success_res_dto.dart';
 import 'package:nopassauthenticationclient/data/user.dart';
 import 'package:nopassauthenticationclient/data/user_registration_input.dart';
-import 'package:nopassauthenticationclient/view/components/dialogs/wait.dart';
+import 'package:nopassauthenticationclient/view/screens/auth/seeds.dart';
 import 'package:nopassauthenticationclient/view/screens/register/validate_registration.dart';
-import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/screens/auth/seeds.dart';
 import 'package:pointycastle/export.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 
 final _preEncrypter = PrepareForEncryption();
-final _retrieveEncryptionData = RetrieveEncryptionData();
 final _keyStore = LocalStoreKeyPair();
 final LocalStorageController lSC = LocalStorageController();
 
@@ -51,7 +46,7 @@ class RegisterControllerNew extends StatefulWidget{
     //store the keypair
     await _keyStore.addKeyPair(pair, seeds);
     await _keyStore.addSeeds(seeds);
-    await lSC.add("registrationCode", rCode);
+    await lSC.add("registrationCode", rCode, force: true);
     //get registrationInfo
     await _popupController.update("connecting to server");
 
@@ -93,7 +88,7 @@ class RegisterControllerNew extends StatefulWidget{
         Navigator.of(context).pushNamed(SeedsScreen.routeName);
       }else{
         // Bad request route:
-
+        //Navigator.of(context).pushNamed("/");
       }
     }).catchError((error){
       print(error);

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/components/drawer.dart';
+import 'package:nopassauthenticationclient/controller/encryption_controller.dart';
+import 'package:nopassauthenticationclient/view/components/drawer.dart';
+
+
+final EncryptionController _encController = EncryptionController();
 
 class AccountScreen extends StatelessWidget {
   static const String routeName = "/account";
@@ -13,6 +17,17 @@ class AccountScreen extends StatelessWidget {
       ),
       drawer: AuthDrawer(),
       body: Column(
+        children: [
+          RaisedButton(
+            child: Text("Recover"),
+            color: Colors.blue,
+            onPressed: (){
+              _encController.removeEncryptionKeys();
+              //navigate to route
+              Navigator.of(context).pushNamed("/");
+            },
+          )
+        ]
       ),
     );
   }
