@@ -20,7 +20,7 @@ class AccountScreen extends StatelessWidget {
             Container(
                 padding: EdgeInsets.all(10),
                 child:  RaisedButton(
-                  child: Text("Recover"),
+                  child: Text("Logout"),
                   color: Colors.blue,
                   onPressed: (){
                     _encController.removeEncryptionKeys();
