@@ -4,10 +4,8 @@ final LocalStoreKeyPair _localStoreKeyPair = LocalStoreKeyPair();
 
 class EncryptionController{
 
-
   void removeEncryptionKeys(){
     _localStoreKeyPair.clearLocalKeyPair();
   }
-
 
 }

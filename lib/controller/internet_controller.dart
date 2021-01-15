@@ -1,20 +1,14 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:nopassauthenticationclient/controller/encrypter/compute_encryption.dart';
-import 'package:nopassauthenticationclient/controller/encrypter/prepare_encryption.dart';
-import 'package:nopassauthenticationclient/controller/encrypter/store_encryption.dart';
 import 'package:nopassauthenticationclient/controller/local_storage.dart';
 import 'package:nopassauthenticationclient/data/dto/requests/to_activate_session_dto.dart';
 import 'package:nopassauthenticationclient/data/dto/requests/validate_registration_req_dto.dart';
 import 'package:nopassauthenticationclient/data/dto/requests/verify_session_dto.dart';
 import 'package:nopassauthenticationclient/data/user_registration_input.dart';
 import 'package:pointycastle/api.dart';
-import 'package:pointycastle/asymmetric/api.dart';
 
-final _preEncrypter = PrepareForEncryption();
 final _retrieveEncryptionData = RetrieveEncryptionData();
-final _keyStore = LocalStoreKeyPair();
 final _localStore = LocalStorageController();
 
 class InternetController{
@@ -57,8 +51,6 @@ class InternetController{
     );
   }
 
-
-
   Future<List<String>> getSeeds() async {
     List<String> seedList20 = [];
     await http.get(baseUrl + "/seeds",
@@ -68,7 +60,6 @@ class InternetController{
     ).then((response){
       List<dynamic> jsonList = jsonDecode(response.body)["data"];
       jsonList.forEach((element) {seedList20.add(element.toString());});
-
     });
     seedList20.shuffle();
     List<String> seedList8 = [];

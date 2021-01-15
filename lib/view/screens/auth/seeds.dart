@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nopassauthenticationclient/controller/encrypter/store_encryption.dart';
-import 'package:nopassauthenticationclient/controller/new/register_controller.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/controller/register_controller.dart';
 import 'package:nopassauthenticationclient/data/user.dart';
-import 'package:nopassauthenticationclient/view/components/drawer.dart';
-
+import 'package:nopassauthenticationclient/view/components/drawer/auth_drawer.dart';
 
 class SeedsScreen extends StatefulWidget{
   static const routeName = "/seeds";
 
   @override
   SeedsScreenState createState() => SeedsScreenState();
-
 }
 
 class SeedsScreenState extends State<SeedsScreen>{
@@ -71,7 +69,6 @@ class SeedsScreenState extends State<SeedsScreen>{
     return mainScaffold;
   }
 
-
   void setUserData()async{
     User user = await userRepo.getUser();
     List<String> seeds = await encRepo.getSeeds();
@@ -81,5 +78,4 @@ class SeedsScreenState extends State<SeedsScreen>{
       seedsValues = seeds;
     });
   }
-
 }

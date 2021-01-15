@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nopassauthenticationclient/controller/encryption_controller.dart';
-import 'package:nopassauthenticationclient/view/components/drawer.dart';
-
+import 'package:nopassauthenticationclient/view/components/drawer/auth_drawer.dart';
 
 final EncryptionController _encController = EncryptionController();
 

@@ -1,7 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-
-
 class LocalStorageController {
   final storage = new FlutterSecureStorage();
 
@@ -18,5 +16,4 @@ class LocalStorageController {
       await storage.write(key: key, value: value);
     }
   }
-
 }

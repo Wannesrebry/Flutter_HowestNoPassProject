@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:nopassauthenticationclient/controller/encrypter/compute_encryption.dart';
 import 'package:nopassauthenticationclient/controller/encrypter/prepare_encryption.dart';
 import 'package:nopassauthenticationclient/controller/encrypter/store_encryption.dart';
@@ -21,7 +22,7 @@ final _keyStore = LocalStoreKeyPair();
 final LocalStorageController lSC = LocalStorageController();
 
 
-class RegisterControllerNew extends StatefulWidget{
+class RegisterController extends StatefulWidget{
   final PopupController _popupController = PopupController();
   final InternetController _internetController = InternetController();
 
@@ -31,6 +32,26 @@ class RegisterControllerNew extends StatefulWidget{
     throw UnimplementedError();
   }
 
+  formatValidation(String code){
+    String resultMsg = "";
+    if(isCodeFormatValid(code)){
+      resultMsg = ("Valid code format");
+    }else{
+      resultMsg = ("Invalid code.");
+    }
+    return resultMsg;
+  }
+
+  isCodeFormatValid(String code){
+    return code.length == 10;
+  }
+
+  MaterialColor validationColor(String code) {
+    if(isCodeFormatValid(code)){return Colors.green;}
+    else{
+      return Colors.red;
+    }
+  }
 
   onClickRegistrationButton(String rCode, BuildContext context)async{
     await _popupController.init(ProgressDialog(

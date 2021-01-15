@@ -11,7 +11,6 @@ import 'package:nopassauthenticationclient/view/screens/recover.dart';
 import 'package:nopassauthenticationclient/view/screens/register/register.dart';
 import 'package:nopassauthenticationclient/view/screens/register/validate_registration.dart';
 
-
 void main() => runApp(Run());
 
 class Run extends StatelessWidget{

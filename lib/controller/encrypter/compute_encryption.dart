@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
-
 import 'package:asn1lib/asn1lib.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:nopassauthenticationclient/controller/encrypter/prepare_encryption.dart';
-import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/data/encrypt_data.dart';
+import 'package:nopassauthenticationclient/data/encrypt_data.dart';
 import 'package:pointycastle/export.dart';
 
 final Map<String, String> _digestIntifierHexes = {
@@ -113,8 +111,6 @@ class RetrieveEncryptionData{
     return """-----BEGIN PUBLIC KEY-----\r\n$dataBase64\r\n-----END PUBLIC KEY-----""";
   }
 
-
-
   parsePublicKeyFromPem(pemString) {
     List<int> publicKeyDER = decodePEM(pemString);
     var asn1Parser = new ASN1Parser(publicKeyDER);
@@ -216,4 +212,5 @@ class RetrieveEncryptionData{
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
 Random _rnd = Random();
 String _getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length)))
+);

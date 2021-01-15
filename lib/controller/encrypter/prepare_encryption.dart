@@ -1,8 +1,5 @@
-
-
 import 'dart:math';
 import 'dart:typed_data';
-
 import 'package:pointycastle/export.dart';
 
 class PrepareForEncryption{

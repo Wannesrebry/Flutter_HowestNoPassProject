@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nopassauthenticationclient/controller/local_storage.dart';
 import 'package:nopassauthenticationclient/controller/logincontroller.dart';
-import 'package:nopassauthenticationclient/view/components/drawer.dart';
+import 'package:nopassauthenticationclient/view/components/drawer/auth_drawer.dart';
 
 class AuthVerify extends StatefulWidget{
   static const routeName = "/verify";
@@ -27,10 +27,6 @@ class VerifyState extends State<AuthVerify>{
       token = _token;
     });
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {

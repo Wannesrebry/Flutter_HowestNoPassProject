@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nopassauthenticationclient/controller/new/register_controller.dart';
-import 'package:nopassauthenticationclient/view/components/drawer.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/controller/register_controller.dart';
+import 'package:nopassauthenticationclient/view/components/drawer/basic_drawer.dart';
 import 'package:nopassauthenticationclient/view/screens/auth/home.dart';
 
 class HomeScreen extends StatefulWidget{
   @override
   HomeScreenState createState() => HomeScreenState();
-
 }
 
 class HomeScreenState extends State<HomeScreen>{

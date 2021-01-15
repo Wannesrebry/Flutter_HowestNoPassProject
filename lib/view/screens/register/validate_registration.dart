@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nopassauthenticationclient/controller/new/register_controller.dart';
+import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/controller/register_controller.dart';
 import 'package:nopassauthenticationclient/data/dto/response/register_data_verify_req_dto.dart';
 import 'package:nopassauthenticationclient/data/user_registration_input.dart';
-import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/components/drawer.dart';
+import 'package:nopassauthenticationclient/view/components/drawer/basic_drawer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-final registerControllerNew = RegisterControllerNew();
+final registerControllerNew = RegisterController();
 
 class ValidateRegistration extends StatefulWidget{
   static const routeName = "/validate_registration";

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/view/components/drawer.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
-
+import 'package:nopassauthenticationclient/view/components/drawer/basic_drawer.dart';
 
 class RecoverScreen extends StatelessWidget{
   static const routeName = "/recover";
@@ -23,13 +20,5 @@ class RecoverScreen extends StatelessWidget{
       )
     );
   }
-
-
-  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-    print(args.value);
-  }
-
-
-
 }
 
