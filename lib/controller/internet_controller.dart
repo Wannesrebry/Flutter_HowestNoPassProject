@@ -18,7 +18,7 @@ final _keyStore = LocalStoreKeyPair();
 final _localStore = LocalStorageController();
 
 class InternetController{
-  final String baseUrl = "http://10.143.210.108:8888"; // "http://192.168.10.59:8888";
+  final String baseUrl = "http://192.168.10.59:8888";
   final Map<String,String> _headers = {
     'Content-Type': 'application/json',
   };
