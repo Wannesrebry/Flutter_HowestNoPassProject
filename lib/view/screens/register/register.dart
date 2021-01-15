@@ -20,7 +20,6 @@ class _RegisterScreen extends State<RegisterScreen>{
 
   String rCodeValidationHolder = "";
   var rCodeValidationHolderColor = Colors.red;
-  BuildContext _popupCtx;
 
   @override
   void dispose(){

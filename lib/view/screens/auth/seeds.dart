@@ -38,7 +38,8 @@ class SeedsScreenState extends State<SeedsScreen>{
               + "\n $identifier",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.black
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold
               ),
             ),
           ),

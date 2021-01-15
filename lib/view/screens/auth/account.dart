@@ -15,18 +15,21 @@ class AccountScreen extends StatelessWidget {
         backgroundColor: Colors.blue,
       ),
       drawer: AuthDrawer(),
-      body: Column(
-        children: [
-          RaisedButton(
-            child: Text("Recover"),
-            color: Colors.blue,
-            onPressed: (){
-              _encController.removeEncryptionKeys();
-              //navigate to route
-              Navigator.of(context).pushNamed("/");
-            },
-          )
-        ]
+      body: ListView(
+          children: <Widget>[
+            Container(
+                padding: EdgeInsets.all(10),
+                child:  RaisedButton(
+                  child: Text("Recover"),
+                  color: Colors.blue,
+                  onPressed: (){
+                    _encController.removeEncryptionKeys();
+                    //navigate to route
+                    Navigator.of(context).pushNamed("/");
+                  },
+                )
+            ),
+          ]
       ),
     );
   }

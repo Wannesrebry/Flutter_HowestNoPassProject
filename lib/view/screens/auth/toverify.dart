@@ -37,15 +37,15 @@ class VerifyState extends State<AuthVerify>{
         backgroundColor: Colors.blue,
       ),
       drawer: AuthDrawer(),
-      body: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Text("$application",
-              textAlign: TextAlign.center,
+      body: ListView(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Text("$application",
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-          Container(
+            Container(
               child : RaisedButton(
                 child: Text("allow"),
                 color: Colors.green,
@@ -54,18 +54,18 @@ class VerifyState extends State<AuthVerify>{
                   loginController.onClickVerify(token, context);
                 },
               ),
-          ),
-          Container(
-            child: RaisedButton(
-              child: Text("decline"),
-              color: Colors.red,
-              onPressed: (){
-                loginController.onClickVerify(null, context);
-              },
+            ),
+            Container(
+                child: RaisedButton(
+                  child: Text("decline"),
+                  color: Colors.red,
+                  onPressed: (){
+                    loginController.onClickVerify(null, context);
+                  },
+                )
             )
-          )
-        ],
-      )
+          ]
+      ),
     );
   }
 }
