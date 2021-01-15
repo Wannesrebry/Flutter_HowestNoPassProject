@@ -22,17 +22,20 @@ class AuthHomeState extends State<AuthHome>{
         backgroundColor: Colors.blue,
       ),
       drawer: AuthDrawer(),
-      body: Column(
-        children: [
-          RaisedButton(
-            child: Text("Check for login requests"),
-            color: Colors.blue,
-            onPressed: (){
-              //navigate to route
-              loginController.onClickLoginRequestsBtn(context);
-            },
-          )
-        ],
+      body: ListView(
+          children: <Widget>[
+            Container(
+                padding: EdgeInsets.all(10),
+                child: RaisedButton(
+                  child: Text("Check for login requests"),
+                  color: Colors.blue,
+                  onPressed: (){
+                    //navigate to route
+                    loginController.onClickLoginRequestsBtn(context);
+                  },
+                )
+            ),
+          ]
       ),
     );
   }

@@ -39,7 +39,7 @@ class LoginController extends StatefulWidget{
   onClickLoginRequestsBtn(BuildContext context)async{
     String identifier = await lSC.getKey("identifier");
     ToActivateSessionDto session = await _internetController.getToActivateSession(identifier.toString());
-    lSC.add("verify_token", session.token.toString());
+    lSC.add("verify_token", session.token.toString(), force: true);
     lSC.add("verify_application", session.application.toString());
     Navigator.of(context).pushNamed(AuthVerify.routeName);
   }

@@ -26,10 +26,8 @@ class AuthDrawer extends StatelessWidget{
     NavItemFactory navItemFactory = new NavItemFactory(context);
    return DrawerTemplate().create([
      navItemFactory.create(Icons.home, "Home", "/"),
-     navItemFactory.create(Icons.account_box_rounded, "Account", AccountScreen.routeName),
-     navItemFactory.create(Icons.settings, "Seeds", SeedsScreen.routeName),
+     navItemFactory.create(Icons.settings, "Account", SeedsScreen.routeName),
      navItemFactory.create(Icons.settings, "Settings", AccountScreen.routeName),
-     navItemFactory.create(Icons.article_outlined, "Logs", AccountScreen.routeName)
    ]);
   }
 }
