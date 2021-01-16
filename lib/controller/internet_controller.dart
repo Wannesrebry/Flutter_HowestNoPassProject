@@ -12,7 +12,7 @@ final _retrieveEncryptionData = RetrieveEncryptionData();
 final _localStore = LocalStorageController();
 
 class InternetController{
-  final String baseUrl = "http://192.168.10.59:8888";
+  final String baseUrl = "http://10.143.210.108:8888"; //"http://192.168.10.59:8888";
   final Map<String,String> _headers = {
     'Content-Type': 'application/json',
   };
@@ -81,23 +81,17 @@ class InternetController{
     });
   }
 
-  Future<void> allowSession(String token,  PrivateKey privateKey) async{
+  Future<void> respondSession(String token,  PrivateKey privateKey, String status) async{
     String application = await _localStore.getKey("verify_application");
     String identifier = await _localStore.getKey("identifier");
     final encData = _retrieveEncryptionData.generateVerifiableData(privateKey);
-    VerifySessionDto dto = VerifySessionDto(application.toString(), "ALLOW", encData.signature, encData.data, identifier.toString());
+    VerifySessionDto dto = VerifySessionDto(application.toString(), status, encData.signature, encData.data, identifier.toString());
     await http.post(baseUrl + "/mobile/verify?token=$token",
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
         body: json.encode(dto.toJson())
-    ).then((response){
-
-    });
-  }
-
-  Future<void> denySession(String token) {
-
+    );
   }
 }
 

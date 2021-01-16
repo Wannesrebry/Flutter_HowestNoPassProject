@@ -107,7 +107,6 @@ class _RegisterScreen extends State<RegisterScreen>{
         ),
       ),
     );
-
   }
 
   showLoadingScreen(BuildContext context)async{

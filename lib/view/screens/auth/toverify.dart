@@ -51,7 +51,7 @@ class VerifyState extends State<AuthVerify>{
                 color: Colors.green,
                 onPressed: (){
                   //navigate to route
-                  loginController.onClickVerify(token, context);
+                  loginController.onClickVerify(token,"ALLOW", context);
                 },
               ),
             ),
@@ -60,7 +60,7 @@ class VerifyState extends State<AuthVerify>{
                   child: Text("decline"),
                   color: Colors.red,
                   onPressed: (){
-                    loginController.onClickVerify(null, context);
+                    loginController.onClickVerify(token, "DENY", context);
                   },
                 )
             )

@@ -11,6 +11,7 @@ import 'package:nopassauthenticationclient/data/dto/response/register_data_verif
 import 'package:nopassauthenticationclient/data/dto/response/register_success_res_dto.dart';
 import 'package:nopassauthenticationclient/data/user.dart';
 import 'package:nopassauthenticationclient/data/user_registration_input.dart';
+import 'package:nopassauthenticationclient/view/components/dialogs/feedback_dialog.dart';
 import 'package:nopassauthenticationclient/view/screens/auth/seeds.dart';
 import 'package:nopassauthenticationclient/view/screens/register/validate_registration.dart';
 import 'package:pointycastle/export.dart';
@@ -73,19 +74,20 @@ class RegisterController extends StatefulWidget{
 
     _internetController.startRegistration(rCode, pair).then(
             (response) async{
-            ToVerifyDataResDto reqDto = ToVerifyDataResDto.fromJson(jsonDecode(response.body)["res"]);
-            await lSC.add("sessionId", reqDto.sessionId, force: true);
-            await lSC.add("blurredFirstName", reqDto.firstName, force: true);
-            await lSC.add("blurredLastName", reqDto.lastName, force: true);
-            await _popupController.closeActive();
-            //Go to new page:
-            Navigator.of(context).pushNamed(ValidateRegistration.routeName);
+              if(200 == response.statusCode){
+                ToVerifyDataResDto reqDto = ToVerifyDataResDto.fromJson(jsonDecode(response.body)["res"]);
+                await lSC.add("sessionId", reqDto.sessionId, force: true);
+                await lSC.add("blurredFirstName", reqDto.firstName, force: true);
+                await lSC.add("blurredLastName", reqDto.lastName, force: true);
+                await _popupController.closeActive();
+                //Go to new page:
+                Navigator.of(context).pushNamed(ValidateRegistration.routeName);
+              }else{
+                // when something goes wrong, reload current page.
+                await _popupController.closeActive();
+                await new FeedbackDialog("No user with given registration code found!").init(context);
+              }
         });
-
-    // close waiting popup
-
-    // Go to Validate data screen:
-
   }
 
   Future<ToVerifyDataResDto> getToVerifyData()async{
@@ -98,7 +100,6 @@ class RegisterController extends StatefulWidget{
   Future<void> verifyData(UserRegistrationInput input, BuildContext context) async{
     PrivateKey privateKey= await _keyStore.getPrivateKey();
     _internetController.validateRegistration(input, privateKey).then((response)async{
-      print(response.body);
       if(response.statusCode == 200){
         // Save user locally:
         Map jsonBody = json.decode(response.body);
@@ -109,14 +110,12 @@ class RegisterController extends StatefulWidget{
         Navigator.of(context).pushNamed(SeedsScreen.routeName);
       }else{
         // Bad request route:
-        //Navigator.of(context).pushNamed("/");
+        Navigator.of(context).pushNamed("/");
       }
     }).catchError((error){
       print(error);
     });
-
   }
-
 }
 
 class PopupController{
@@ -173,5 +172,4 @@ class LocalUserRepo{
       return false;
     }
   }
-
 }

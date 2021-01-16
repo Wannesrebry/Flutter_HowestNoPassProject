@@ -37,7 +37,7 @@ class _ValidateRegistrationState extends State<ValidateRegistration> {
 
   @override
   Widget build(BuildContext context) {
-
+    input.birthDate = DateTime.now();
     return Scaffold(
         appBar: AppBar(
           title: const Text("Validate registration"),
@@ -90,22 +90,12 @@ class _ValidateRegistrationState extends State<ValidateRegistration> {
                       },
                     ),
                   ),
-                  Text("BirthDate:",
-                    textAlign: TextAlign.left,
-                  ),
-                  Container(
-                    child: SfDateRangePicker(
-                        onSelectionChanged: _onSelectionChanged
-                    ),
-                  ),
                   RaisedButton(
                       color: Colors.green,
                       child: Text('Verify',
                           style: TextStyle(color: Colors.white)),
                       onPressed: ()async {
-                        // send to server.
                         registerControllerNew.verifyData(input, context);
-                          print(input);
                       })
                 ])
         )
