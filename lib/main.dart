@@ -23,7 +23,7 @@ class Run extends StatelessWidget{
         AccountScreen.routeName: (BuildContext context) => new AccountScreen(),
         RegisterScreen.routeName: (BuildContext context) => new RegisterScreen(),
         ValidateRegistration.routeName: (BuildContext context) => new ValidateRegistration(),
-        RecoverScreen.routeName: (BuildContext context) => new RecoverScreen(),
+        RecoveryScreen.routeName: (BuildContext context) => new RecoveryScreen(),
         SeedsScreen.routeName: (BuildContext context) => new SeedsScreen(),
         AuthHome.routeName: (BuildContext context) => new AuthHome(),
         AuthVerify.routeName: (BuildContext context) => new AuthVerify()

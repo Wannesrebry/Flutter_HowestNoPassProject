@@ -17,7 +17,6 @@ class LoginController extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     throw UnimplementedError();
   }
 
@@ -31,7 +30,6 @@ class LoginController extends StatefulWidget{
     }catch(ignore){
       await new FeedbackDialog("No login request detected.").init(context);
     }
-
   }
 
   void onClickVerify(String token,String status,  BuildContext context) async{

@@ -12,7 +12,7 @@ class BasicDrawer extends StatelessWidget{
     return DrawerTemplate().create([
       navItemFactory.create(Icons.home, "Home", "/"),
       navItemFactory.create(Icons.account_box_rounded, "Register", RegisterScreen.routeName),
-      navItemFactory.create(Icons.settings, "Recover", RecoverScreen.routeName),
+      navItemFactory.create(Icons.settings, "Recover", RecoveryScreen.routeName),
     ]);
   }
 }

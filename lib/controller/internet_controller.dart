@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:nopassauthenticationclient/controller/encrypter/compute_encryption.dart';
 import 'package:nopassauthenticationclient/controller/local_storage.dart';
+import 'package:nopassauthenticationclient/data/dto/requests/recovery_req_dto.dart';
 import 'package:nopassauthenticationclient/data/dto/requests/to_activate_session_dto.dart';
 import 'package:nopassauthenticationclient/data/dto/requests/validate_registration_req_dto.dart';
 import 'package:nopassauthenticationclient/data/dto/requests/verify_session_dto.dart';
@@ -93,6 +94,22 @@ class InternetController{
         body: json.encode(dto.toJson())
     );
   }
+
+  Future<bool> recoverUser(RecoveryRequestDTO dto) async{
+    bool succes = await http.post(baseUrl + "/mobile/recovery",
+          headers: _headers,
+          body: json.encode(dto.toJson())
+    ).then((response){
+      if(response.statusCode == 200){
+        // response data of user to localstorage:
+        final tmp = response.body;
+        return true;
+      }else return false;
+    });
+    return succes;
+  }
+
+
 }
 
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/controller/register_controller.dart';
+import 'package:nopassauthenticationclient/controller/register_controller.dart';
+import '../recover.dart';
 import 'package:nopassauthenticationclient/view/components/dialogs/wait.dart';
 import 'package:nopassauthenticationclient/view/components/drawer/basic_drawer.dart';
-import 'package:nopassauthenticationclient/view/screens/recover.dart';
 
 
 class RegisterScreen extends StatefulWidget{
@@ -99,7 +99,7 @@ class _RegisterScreen extends State<RegisterScreen>{
                   child: Text("Recover"),
                   color: Colors.blue,
                   onPressed: (){
-                    Navigator.of(context).pushNamed(RecoverScreen.routeName);
+                    Navigator.of(context).pushNamed(RecoveryScreen.routeName);
                   },
                 )
             ),
