@@ -4,7 +4,6 @@ import 'package:nopassauthenticationclient/controller/internet_controller.dart';
 import 'package:nopassauthenticationclient/controller/local_storage.dart';
 import 'package:nopassauthenticationclient/data/dto/requests/to_activate_session_dto.dart';
 import 'package:nopassauthenticationclient/view/components/dialogs/feedback_dialog.dart';
-import 'package:nopassauthenticationclient/view/components/dialogs/wait.dart';
 import 'package:nopassauthenticationclient/view/screens/auth/toverify.dart';
 import 'package:pointycastle/export.dart';
 

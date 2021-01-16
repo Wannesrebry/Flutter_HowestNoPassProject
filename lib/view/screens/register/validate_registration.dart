@@ -3,7 +3,6 @@ import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationc
 import 'package:nopassauthenticationclient/data/dto/response/register_data_verify_req_dto.dart';
 import 'package:nopassauthenticationclient/data/user_registration_input.dart';
 import 'package:nopassauthenticationclient/view/components/drawer/basic_drawer.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 final registerControllerNew = RegisterController();
 
@@ -60,7 +59,7 @@ class _ValidateRegistrationState extends State<ValidateRegistration> {
                   Text("Complete the data in order to succeed registration.",
                     textAlign: TextAlign.center,
                   ),
-                  Text("First name: ${blurredFirstName}",
+                  Text("First name: $blurredFirstName",
                     textAlign: TextAlign.left,
                   ),
                   Container(
@@ -75,7 +74,7 @@ class _ValidateRegistrationState extends State<ValidateRegistration> {
                       },
                     ),
                   ),
-                  Text("Last name: ${blurredLastName}",
+                  Text("Last name: $blurredLastName",
                     textAlign: TextAlign.left,
                   ),
                   Container(
@@ -101,10 +100,5 @@ class _ValidateRegistrationState extends State<ValidateRegistration> {
         )
     );
   }
-
-  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-    input.birthDate = args.value;
-  }
-
 }
 
