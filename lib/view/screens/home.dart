@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'file:///C:/Users/wannes-nzxt/AndroidStudioProjects/nopassauthenticationclient/lib/controller/register_controller.dart';
 import 'package:nopassauthenticationclient/view/components/drawer/basic_drawer.dart';
 import 'package:nopassauthenticationclient/view/screens/auth/home.dart';
+import 'package:nopassauthenticationclient/view/screens/register/register.dart';
 
 class HomeScreen extends StatefulWidget{
   @override
@@ -25,11 +26,20 @@ class HomeScreenState extends State<HomeScreen>{
             Image.asset('assets/images/banner.jpg',
                 fit: BoxFit.cover
             ),
-            Text("Mars NoPass Auth",
+            Text("Register to gain access to all mars-application!",
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
+            Container(
+                padding: EdgeInsets.all(10),
+                child: OutlineButton(
+                  child: Text("Register"),
+                  onPressed: (){
+                    Navigator.of(context).pushNamed(RegisterScreen.routeName);
+                  },
+                )
+            )
           ],
         ),
       );
