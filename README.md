@@ -6,6 +6,8 @@ Auth Application with postman : https://www.youtube.com/watch?v=t1a88cjyKDA&feat
 
 Auth Application with mars-front: https://www.youtube.com/watch?app=desktop&v=-5oolv6H-74&feature=youtu.be&ab_channel=WannesRebry
 
+Link to the corresponding backend (API): https://git.ti.howest.be/TI/2020-2021/s5/trending-topics-in-software-development/project/mars-it-05/mars-no-pass-authentication-server
+
 ## Getting Started - flutter docs
 
 This project is a starting point for a Flutter application.
